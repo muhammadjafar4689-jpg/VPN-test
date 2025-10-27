@@ -1,11 +1,23 @@
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
-  res.send("VPN Test Server is running successfully!");
+  res.send("Server is live!");
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.get("/connect", (req, res) => {
+  res.send("Connected to VPN backend!");
+});
+
+// ✅ New API endpoint to send data (example)
+app.get("/data", (req, res) => {
+  res.json({
+    status: "ok",
+    dailyLimit: "50MB",
+    message: "Welcome to Stark VPN Reloaded!"
+  });
+});
+
+app.listen(10000, () => {
+  console.log("Server running on port 10000");
 });
