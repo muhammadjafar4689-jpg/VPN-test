@@ -1,21 +1,24 @@
 const express = require("express");
-const cors = require("cors");
+const cors = require("cors"); // allow connections from your HTML app
 const app = express();
 
-// ✅ Enable CORS (this allows your HTML app to connect safely)
-app.use(cors());
+app.use(cors()); // enable CORS for all routes
+app.use(express.json());
 
-// ✅ Default route
+// Root route
 app.get("/", (req, res) => {
-  res.send("Server is live!");
+  res.send("Server is live and ready for VPN connection!");
 });
 
-// ✅ VPN Connect route
+// Connect route
 app.get("/connect", (req, res) => {
-  res.json({ status: "connected", message: "Connected to VPN backend!" });
+  res.json({
+    status: "connected",
+    message: "Connected to VPN backend!"
+  });
 });
 
-// ✅ Example Data API (optional)
+// Example data endpoint
 app.get("/data", (req, res) => {
   res.json({
     status: "ok",
@@ -24,8 +27,7 @@ app.get("/data", (req, res) => {
   });
 });
 
-// ✅ Start server
-const PORT = process.env.PORT || 10000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+// Start server
+app.listen(10000, () => {
+  console.log("Server running on port 10000");
 });
